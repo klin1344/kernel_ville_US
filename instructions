@@ -1,0 +1,32 @@
+How to build this kernel:
+
+How to build this kernel from source:
+
+This is assuming you already have your Linux environment setup and installed the required packages for compiling a kernel. Make sure mkbootimg is installed your /bin/ directory.
+
+1. Clone my initramfs and kernel sources.
+
+git clone git://github.com/klin1344/kernel_ville_US.git
+git clone git://github.com/klin1344/initramfs_ville.git
+
+
+2. Compress the ramdisk into a gzipped archive. First navigate to the initramfs_ville directory, then:
+
+find . | cpio -o -H newc | gzip > ../ramdisk.gz
+
+
+3. Grab the toolchain from DoomLord's handy repo:
+
+git clone git://github.com/DooMLoRD/android_prebuilt_toolchains.git toolchains
+
+
+4. I have created an easy build script. Modify the top four lines to be applicable to your setup. Make sure CROSS_COMPILE is set to the directory of the toolchain we just downloaded earlier (there are two; not the Linaro one). And change INITRAMFS_DIR to the directory of the ramdisk.gz your created earlier.
+
+
+5. Build. First navigate to the kernel_ville_US directory.
+
+./build.sh ville_defconfig
+The script will detect the number of cores of your CPU and automatically make with the optimal -j#.
+
+
+6. If all goes well you should end up with a boot.img in the kernel_ville_US directory.
