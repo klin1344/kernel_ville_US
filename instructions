@@ -1,6 +1,6 @@
-How to build this kernel:
-
 How to build this kernel from source:
+
+
 
 This is assuming you already have your Linux environment setup and installed the required packages for compiling a kernel. Make sure mkbootimg is installed your /bin/ directory.
 
