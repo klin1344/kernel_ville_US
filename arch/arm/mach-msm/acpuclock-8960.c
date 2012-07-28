@@ -151,7 +151,7 @@ static void set_acpuclk_L2_freq_foot_print(unsigned khz)
 #ifdef CONFIG_ACPU_CUSTOM_FREQ_SUPPORT
 static int acpu_max_freq = CONFIG_ACPU_MAX_FREQ;
 #else
-static int acpu_max_freq = 1890000;
+static int acpu_max_freq = 0;
 #endif
 
 enum scalables {
