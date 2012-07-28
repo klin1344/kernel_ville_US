@@ -147,6 +147,12 @@ static void set_acpuclk_L2_freq_foot_print(unsigned khz)
 /* PTE EFUSE register. */
 #define QFPROM_PTE_EFUSE_ADDR	(MSM_QFPROM_BASE + 0x00C0)
 
+/* HTC: Custom max frequency. */
+#ifdef CONFIG_ACPU_CUSTOM_FREQ_SUPPORT
+static int acpu_max_freq = CONFIG_ACPU_MAX_FREQ;
+#else
+static int acpu_max_freq = 1890000;
+#endif
 
 enum scalables {
 	CPU0 = 0,
@@ -1538,10 +1544,24 @@ static struct acpu_level * __init select_freq_plan(void)
 		kraitv2_apply_vmin(acpu_freq_tbl);
 	}
 
+	/* Adjust frequency table according to custom acpu_max_freq */
+	if (acpu_max_freq) {
+		for (l = acpu_freq_tbl; l->speed.khz != 0; l++) {
+			if (l->speed.khz == acpu_max_freq) {
+				/* Custom max freq found in table.
+				 * Mark all subsequent frequencies
+				 * as not supported.
+				 */
+				for (++l; l->speed.khz != 0; l++)
+					l->use_for_scaling = 0;
+				break;
+			}
+		}
+	}
 
 	/* Find the max supported scaling frequency. */
 	for (l = acpu_freq_tbl; l->speed.khz != 0; l++)
-		if (l->use_for_scaling)
+		if (l->use_for_scaling && l->speed.khz==1512000)
 			max_acpu_level = l;
 	BUG_ON(!max_acpu_level);
 	pr_info("Max ACPU freq: %u KHz\n", max_acpu_level->speed.khz);
