@@ -1,6 +1,6 @@
 CROSS_COMPILE=/home/klin1344/toolchains/arm-eabi-4.4.3/bin/arm-eabi-
 INITRAMFS_DIR=ramdisk.gz
-KERNEL_NAME=Fusion_Ultimate
+KERNEL_NAME=Fusion_Ultimate_Sense
 KERNEL_VNUMBER=2.1
 
 # DO NOT MODIFY BELOW THIS LINE
