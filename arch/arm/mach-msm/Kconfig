@@ -2218,13 +2218,6 @@ config ACPU_CUSTOM_FREQ_SUPPORT
 	help
 	  Adds support for custom frequency table adjustments.
 
-config ACPU_MAX_FREQ
-	int "Maximum supported frequency"
-	depends on ACPU_CUSTOM_FREQ_SUPPORT
-	default 0
-	help
-	  If set to non-zero number, will search for this frequency in
-          frequency table and set as maximum supported frequency if found.
 
 config ACPU_OVERCLOCK
 	bool "Use overclock"
