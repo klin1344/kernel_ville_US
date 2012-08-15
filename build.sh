@@ -1,7 +1,7 @@
 CROSS_COMPILE=/home/klin1344/toolchains/arm-eabi-4.4.3/bin/arm-eabi-
 INITRAMFS_DIR=ramdisk.gz
-KERNEL_NAME=Fusion_Ultimate_Sense
-KERNEL_VNUMBER=2.3
+KERNEL_NAME=Fusion_Ult_Sense
+KERNEL_VNUMBER=3.0
 
 # DO NOT MODIFY BELOW THIS LINE
 CURRENT_DIR=`pwd`
@@ -33,5 +33,5 @@ make ARCH=arm -j$NB_CPU CROSS_COMPILE=$CROSS_COMPILE
 # Make boot.img
 echo "Making boot.img"
 cp arch/arm/boot/zImage .
-mkbootimg --kernel zImage --ramdisk $INITRAMFS_DIR --base 80400000 --ramdiskaddr 81800000 --cmdline console=ttyHSL0,115200,n8 -o boot.img
+./mkbootimg --kernel zImage --ramdisk $INITRAMFS_DIR --base 80400000 --ramdiskaddr 81800000 --cmdline console=ttyHSL0,115200,n8 -o boot.img
 echo "Done."
